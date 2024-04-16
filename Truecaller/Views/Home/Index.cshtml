@@ -1,0 +1,97 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+@section scripts {
+    <script>
+        let req_nonce = Math.floor(100000000 + Math.random() * 900000000);
+        let UNIQUE_REQUEST_ID = `@Guid.NewGuid()-${req_nonce}`;
+        const YOUR_APP_KEY = 'YJtqD05c166513074408186d3c061c647bd0d';
+        //const YOUR_APP_KEY = 'aVfMgb92730fd5dc84621af856aaa59e5959e';
+        const YOUR_APP_NAME = "localHost";
+
+        //const req_nonce = 123456789598; // random number of length 8 to 64 characters
+        //const LINK_URL = `truecallersdk://truesdk/web_verify?requestNonce=${req_nonce}&partnerKey=YOUR_APP_KEY&partnerName=YOUR_APP_NAME&lang=LANGUAGE_LOCALE&title=TITLE_STRING_OPTION&skipOption=FOOTER_CTA_STRING`;
+        //const a = document.createElement("a");
+        //a.href = LINK_URL;
+        //a.textContent = "IDK what this is, but click it!"; // Probably best to change this XD. This will be the text that shows up to the user as a link.
+        //document.body.appendChild(a); //You probably want to append this to a different element. use "document.getElementById("ID")" and replace "ID" with the id of the element.
+
+        //window.location = `truecallersdk://truesdk/web_verify?type=btmsheet&requestNonce=${UNIQUE_REQUEST_ID}&partnerKey=${YOUR_APP_KEY}&partnerName=${YOUR_APP_NAME}&lang=en&loginPrefix=continue&loginSuffix=verifymobile&skipOption=useanothernum&ctaPrefix=use&ctaColor=#F75D34&ctaTextColor=#000&btnShape=round&btnShape=rect&ttl=800000`;
+        var wnd = window.open(`truecallersdk://truesdk/web_verify?type=btmsheet&requestNonce=${UNIQUE_REQUEST_ID}&partnerKey=${YOUR_APP_KEY}&partnerName=${YOUR_APP_NAME}&lang=en&loginPrefix=getstarted&loginSuffix=verifymobile&skipOption=useanothernum&ctaPrefix=use&ctaColor=#F75D34&ctaTextColor=#000&btnShape=round&btnShape=rect&ttl=800000`);
+        debugger;
+        setTimeout(function () {
+            if (document.hasFocus()) { //&& wnd.location.href === 'about:blank'
+                debugger;
+                // Truecaller app not present on the device and you redirect the user
+                // to your alternate verification page
+                //wnd.close();
+                $.ajax({
+                    url: 'https://profile4-noneu.truecaller.com/v1/default',
+                    type: 'GET',
+                    data: { requestId: UNIQUE_REQUEST_ID },
+                    headers: {
+                        Authorization: 'Bearer a3sAB0KnGANg4VZwIXfhUyFmPbzoONofl4FjIItac0JQSODp6niW8oBr33uOI-u7',
+                        'Access-Control-Allow-Origin': '*'
+                    },
+                    dataType: 'json',
+                    success: function () { alert('hello!'); },
+                    error: function (ex) { debugger; alert(ex.statusText); },
+                    //beforeSend: setHeader
+                });
+            } else {
+                debugger;
+                // & privacyUrl=LINK_TO_YOUR_PRIVACY_PAGE
+                //     & termsUrl=LINK_TO_YOUR_TERMS_PAGE
+                // window.location = `truecallersdk://truesdk/web_verify?
+                //                 type = btmsheet
+                //                                 requestNonce = ${UNIQUE_REQUEST_ID}
+                //                                     & partnerKey=${YOUR_APP_KEY}
+                //                                                 & partnerName=${YOUR_APP_NAME}
+                //                                             & lang=en
+                //                                                                                                 & loginPrefix=checkout
+                //                                                                     & loginSuffix=loginsignup
+                //                                                                                 & ctaPrefix=proceedwith
+                //                                                                             & ctaColor=#F75D34
+                //                                                                         & ctaTextColor=#000
+                //                                                                                     & btnShape=rect
+                //                                                                                         & skipOption=useanothernum
+                //
+                //                                                                                        & ttl=80000ms`;
+                // {
+                //     "requestId": "RL8YZ41FQMt5Jiak2sc_Ys0OgQA=",
+                //         "accessToken": "a1asX-8_yw-OF-E6Gj_DPyKelJIGUUeYB9U9MJhyeu4hOCbrl",
+                //             "endpoint": "https://profile4-noneu.truecaller.com/v1/default"
+                // }
+                //curl - X GET - H "Authorization: Bearer a3sAB0KnGANg4VZwIXfhUyFmPbzoONofl4FjIItac0JQSODp6niW8oBr33uOI-u7" - H "Cache-Control: no-cache" "https://profile4-noneu.truecaller.com/v1/default"
+                // {
+                //     "requestId": `${UNIQUE_REQUEST_ID}`,
+                //         "status": "flow_invoked"
+                // }
+
+                // window.location = `truecallersdk://truesdk/web_verify?type=btmsheet&requestNonce=${UNIQUE_REQUEST_ID}&partnerKey=${YOUR_APP_KEY}&partnerName=${YOUR_APP_NAME}&lang=en&loginPrefix=continue&loginSuffix=verifymobile&skipOption=useanothernum&ctaPrefix=use&ctaColor=#F75D34&ctaTextColor=#000&btnShape=round&btnShape=rect&ttl=800000`;
+                // $.ajax({
+                //     url: 'https://profile4-noneu.truecaller.com/v1/default',
+                //     type: 'GET',
+                //     headers: {
+                //         Authorization: 'Bearer a3sAB0KnGANg4VZwIXfhUyFmPbzoONofl4FjIItac0JQSODp6niW8oBr33uOI-u7'
+                //     },
+                //     dataType: 'json',
+                //     success: function () { alert('hello!'); },
+                //     error: function (ex) { debugger; alert(ex.responseText); },
+                //     //beforeSend: setHeader
+                // });
+
+                // function setHeader(xhr) {
+                //     xhr.setRequestHeader('Authorization', 'Bearer a3sAB0KnGANg4VZwIXfhUyFmPbzoONofl4FjIItac0JQSODp6niW8oBr33uOI-u7');
+
+                // }
+            }
+        }, 600);
+        // alert("Hi");
+    </script>
+}
