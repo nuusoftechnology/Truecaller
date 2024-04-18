@@ -23,9 +23,9 @@ namespace Truecaller.Controllers
             //_logger.Log(LogLevel.Information, truecallermodels.phoneNumbers);
             return View();
         }
-        [HttpPost, Route("/auth/token")]
+        [HttpPost(nameof(Login), Name = nameof(Login))]
         //[HttpPost]
-        public IActionResult Login(string? accessToken)//(AccessURLModel accessURL)
+        public IActionResult Login(AccessURLModel accessURL)
         {
             //_logger.Log(LogLevel.Information, truecallermodels.phoneNumbers);
             return View();
